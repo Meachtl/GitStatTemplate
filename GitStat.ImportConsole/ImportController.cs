@@ -24,7 +24,7 @@ namespace GitStat.ImportConsole
             List<Commit> commits = new List<Commit>();
 
             //Split read in text into blocks
-            string[] block = text.Split("\n\r");
+            string[] block = text.Split("\n\r\n");
 
             Commit currentCommit; // = GetCommitOfEachBlock(block);
 
@@ -80,6 +80,12 @@ namespace GitStat.ImportConsole
             //get firstline and lastline out of the block
             string firstLine = firstLineBlock.First();
             string lastLine = firstLineBlock.Last();
+            //if (lastLine == null)
+            //{
+            //    lastLine = firstLineBlock.Last();
+            //    //last point
+            //}
+
 
             string[] splittedFirstLine = firstLine.Split(',');
             string[] splittedLastLine = lastLine.Split(',');
@@ -89,13 +95,48 @@ namespace GitStat.ImportConsole
             string hash = splittedFirstLine[HASH];
             string message = splittedFirstLine[MESSAGE];
 
-            int filesChanged = GetNumberOutOfString(splittedLastLine[FILESCHANGED]);
-            int insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-            int deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
+            int filesChanges = GetNumberOutOfString(splittedLastLine[FILESCHANGED]);
+            //int insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
+            //int deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
+
+            int insertions = 0;
+            int deletions = 0;
+
+            if (splittedLastLine[INSERTIONS].Contains('+'))
+            {
+                insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
+                if (splittedLastLine.Length > 3 && splittedLastLine[DELETIONS].Contains('-'))
+                {
+                    deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
+                }
+            }
+            else if (splittedLastLine[INSERTIONS].Contains('-'))
+            {
+                deletions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
+            }
+            //else if (splittedLastLine[DELETIONS].Contains('+'))
+            //{
+            //    insertions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
+            //}
+            //else
+            //{
+            //    deletions= GetNumberOutOfString(splittedLastLine[INSERTIONS]);
+            //}
+
             
 
-            //currentCommit=new Commit(developer,timestamp,hash,message,)
-            
+            //currentCommit = new Commit(developer, timestamp, hash, message, filesChanged, insertions, deletions);
+
+            currentCommit = new Commit
+            {
+                Developer = developer,
+                Date = timestamp,
+                HashCode = hash,
+                Message = message,
+                FilesChanges = filesChanges,
+                Insertions = insertions,
+                Deletions = deletions
+            };
 
             ////get each line out of the block
             //string lineOfBlock = block[0];
