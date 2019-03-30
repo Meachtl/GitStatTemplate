@@ -142,6 +142,14 @@ namespace GitStat.ImportConsole
             //    .TakeWhile(x => x != "")
             //    .ToArray();
 
+            string firstLineofBlock = block[0];
+
+            string[] firstLineBlock = firstLineofBlock.Split("\n");
+
+
+            string firstLine = firstLineBlock.First();
+            string lastLine = firstLineBlock.Last();
+
 
 
 
