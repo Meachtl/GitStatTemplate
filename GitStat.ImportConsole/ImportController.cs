@@ -19,31 +19,94 @@ namespace GitStat.ImportConsole
         public static Commit[] ReadFromCsv()
         {
             string path = MyFile.GetFullNameInApplicationTree(Filename);
-            string text = File.ReadAllText(path, Encoding.Default);            
+            string text = File.ReadAllText(path, Encoding.Default);
+
+            List<Commit> commits = new List<Commit>();
 
             //Split read in text into blocks
             string[] block = text.Split("\n\r");
 
-            //get each line out of the block
-            string lineOfBlock = block[0];
+            Commit currentCommit; // = GetCommitOfEachBlock(block);
 
-            //split lineOfBlock into it rows
-            string[] firstLineBlock = lineOfBlock.Split("\n");
-            
-            //get firstline and lastline out of the block
-            string firstLine = firstLineBlock.First();
-            string lastLine = firstLineBlock.Last();
-
-
-
-
-            if (true)
+            for (int i = 0; i < block.Length; i++)
             {
-
+                //get each line out of the block
+                string lineOfBlock = block[i];
+                currentCommit = GetCommitOfEachBlock(lineOfBlock);
             }
+
+
+            ////get each line out of the block
+            //string lineOfBlock = block[0];
+
+            ////split lineOfBlock into it rows
+            //string[] firstLineBlock = lineOfBlock.Split("\n");
+            
+            ////get firstline and lastline out of the block
+            //string firstLine = firstLineBlock.First();
+            //string lastLine = firstLineBlock.Last();
+
+
+
+
+            
 
             return null;
         }
 
+        private static Commit GetCommitOfEachBlock(string lineOfBlock)
+        {
+            Commit currentCommit;
+            //const int of first line
+            const int HASH = 0;
+            const int DEVELOPER = 1;
+            const int DATE = 2;
+            const int MESSAGE = 3;
+
+            //cons tint of last line
+            const int FILESCHANGED = 0;
+            const int INSERTIONS = 1;
+            const int DELETIONS = 2;
+
+
+            
+            ////get each line out of the block
+            //string lineOfBlock = block[i];
+
+            //split lineOfBlock into it rows
+            string[] firstLineBlock = lineOfBlock.Split("\n");
+
+            //get firstline and lastline out of the block
+            string firstLine = firstLineBlock.First();
+            string lastLine = firstLineBlock.Last();
+
+            string[] splittedFirstLine = firstLine.Split(',');
+            string[] splittedLastLine = lastLine.Split(',');
+
+            Developer developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
+            DateTime.TryParse(splittedFirstLine[DATE], out DateTime timestamp);
+
+
+
+
+            //currentCommit=new Commit(developer,timestamp,)
+            
+
+            ////get each line out of the block
+            //string lineOfBlock = block[0];
+
+            ////split lineOfBlock into it rows
+            //string[] firstLineBlock = lineOfBlock.Split("\n");
+
+            ////get firstline and lastline out of the block
+            //string firstLine = firstLineBlock.First();
+            //string lastLine = firstLineBlock.Last();
+
+
+
+
+
+            return null;
+        }
     }
 }
