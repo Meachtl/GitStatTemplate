@@ -5,17 +5,17 @@ namespace GitStat.Core.Entities
 {
     public class Commit : EntityObject
     {
-        public Commit(/*int developerId,*/ Developer developer, DateTime date, string hashCode, string message, int filesChanges, int insertions, int deletions)
-        {
-            //DeveloperId = developerId;
-            Developer = developer;
-            Date = date;
-            HashCode = hashCode;
-            Message = message;
-            FilesChanges = filesChanges;
-            Insertions = insertions;
-            Deletions = deletions;
-        }
+        //public Commit(/*int developerId,*/ Developer developer, DateTime date, string hashCode, string message, int filesChanges, int insertions, int deletions)
+        //{
+        //    //DeveloperId = developerId;
+        //    Developer = developer;
+        //    Date = date;
+        //    HashCode = hashCode;
+        //    Message = message;
+        //    FilesChanges = filesChanges;
+        //    Insertions = insertions;
+        //    Deletions = deletions;
+        //}
 
         public int DeveloperId { get; set; }
 

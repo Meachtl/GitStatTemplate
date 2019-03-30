@@ -33,6 +33,7 @@ namespace GitStat.ImportConsole
                 //get each line out of the block
                 string lineOfBlock = block[i];
                 currentCommit = GetCommitOfEachBlock(lineOfBlock);
+                commits.Add(currentCommit);
             }
 
 
@@ -85,11 +86,15 @@ namespace GitStat.ImportConsole
 
             Developer developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
             DateTime.TryParse(splittedFirstLine[DATE], out DateTime timestamp);
+            string hash = splittedFirstLine[HASH];
+            string message = splittedFirstLine[MESSAGE];
 
+            int filesChanged = GetNumberOutOfString(splittedLastLine[FILESCHANGED]);
+            int insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
+            int deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
+            
 
-
-
-            //currentCommit=new Commit(developer,timestamp,)
+            //currentCommit=new Commit(developer,timestamp,hash,message,)
             
 
             ////get each line out of the block
@@ -107,6 +112,33 @@ namespace GitStat.ImportConsole
 
 
             return null;
+        }
+
+        private static int GetNumberOutOfString(string line)
+        {
+            var query = line
+                .SkipWhile(x => x < '0' || x > '9');
+
+            //var query = line
+            //    .TakeWhile(x => x >= '0' && x <= '9');
+
+            var number = query
+                .TakeWhile(x => x >= '0' && x <= '9').Reverse().ToArray();
+
+            int result = -1;
+
+            //int test = (int) number[1];
+
+            for (int i = 0; i < number.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    result = 0;
+                }
+                result += (number[i]-48) * (int)Math.Pow(10, i);
+            }
+
+            return result;
         }
     }
 }
