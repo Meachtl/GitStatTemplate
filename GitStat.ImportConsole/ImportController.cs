@@ -119,10 +119,11 @@ namespace GitStat.ImportConsole
 
 
             string path = MyFile.GetFullNameInApplicationTree(Filename);
-
-            string[] lines = File.ReadAllLines(path, Encoding.Default);
-
             string text = File.ReadAllText(path, Encoding.Default);
+
+            //string[] lines = File.ReadAllLines(path, Encoding.Default);
+
+
 
             //var query = lines
             //    .SkipWhile(x => x == "");
@@ -134,19 +135,23 @@ namespace GitStat.ImportConsole
 
             //    });
 
-
+            //Split read in text into blocks
             string[] block = text.Split("\n\r");
+
+
             //string[] block = text.Split("\r\n");
 
             //var query = lines
             //    .TakeWhile(x => x != "")
             //    .ToArray();
 
-            string firstLineofBlock = block[0];
+            //get each line out of the block
+            string lineOfBlock = block[0];
 
-            string[] firstLineBlock = firstLineofBlock.Split("\n");
-
-
+            //split lineOfBlock into it rows
+            string[] firstLineBlock = lineOfBlock.Split("\n");
+            
+            //get firstline and lastline out of the block
             string firstLine = firstLineBlock.First();
             string lastLine = firstLineBlock.Last();
 
