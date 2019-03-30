@@ -21,7 +21,7 @@ namespace GitStat.Persistence
             CommitRepository = new CommitRepository(_dbContext);
             DeveloperRepository = new DeveloperRepository(_dbContext);
 
-            MyLogger.InitializeLogger();
+            //MyLogger.InitializeLogger();
 
             var serviceProvider = _dbContext.GetInfrastructure();
             var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
