@@ -62,7 +62,9 @@ namespace GitStat.ImportConsole
             const int HASH = 0;
             const int DEVELOPER = 1;
             const int DATE = 2;
-            const int MESSAGE = 3;
+            const int MESSAGEONE = 3;
+            const int MESSAGETWO = 4;
+            const int MESSAGETHREE = 5;
 
             //cons tint of last line
             const int FILESCHANGED = 0;
@@ -93,7 +95,19 @@ namespace GitStat.ImportConsole
             Developer developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
             DateTime.TryParse(splittedFirstLine[DATE], out DateTime timestamp);
             string hash = splittedFirstLine[HASH];
-            string message = splittedFirstLine[MESSAGE];
+            //string message = splittedFirstLine[MESSAGEONE];
+            string message = "";
+            for (int i = 3; i < splittedFirstLine.Length; i++)
+            {
+                if (i == 3)
+                {
+                    message += splittedFirstLine[i];
+                }
+                else
+                {
+                    message += ", " + splittedFirstLine[i]; 
+                }
+            }
 
             int filesChanges = GetNumberOutOfString(splittedLastLine[FILESCHANGED]);
             //int insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
