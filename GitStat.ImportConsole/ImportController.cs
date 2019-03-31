@@ -42,7 +42,7 @@ namespace GitStat.ImportConsole
 
             ////split lineOfBlock into it rows
             //string[] firstLineBlock = lineOfBlock.Split("\n");
-            
+
             ////get firstline and lastline out of the block
             //string firstLine = firstLineBlock.First();
             //string lastLine = firstLineBlock.Last();
@@ -50,9 +50,9 @@ namespace GitStat.ImportConsole
 
 
 
-            
 
-            return null;
+
+            return commits.ToArray();
         }
 
         private static Commit GetCommitOfEachBlock(string lineOfBlock)
@@ -152,7 +152,7 @@ namespace GitStat.ImportConsole
 
 
 
-            return null;
+            return currentCommit;
         }
 
         private static int GetNumberOutOfString(string line)
