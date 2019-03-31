@@ -12,6 +12,7 @@ namespace GitStat.ImportConsole
     public class ImportController
     {
         const string Filename = "commits.txt";
+        static Dictionary<string, Developer> _developers = new Dictionary<string, Developer>();
 
         /// <summary>
         /// Liefert die Messwerte mit den dazugehörigen Sensoren
@@ -92,7 +93,19 @@ namespace GitStat.ImportConsole
             string[] splittedFirstLine = firstLine.Split(',');
             string[] splittedLastLine = lastLine.Split(',');
 
-            Developer developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
+            Developer developer;
+
+            if (_developers.ContainsKey(splittedFirstLine[DEVELOPER]))
+            {
+                _developers.TryGetValue(splittedFirstLine[DEVELOPER], out developer);
+            }
+            else
+            {
+                developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
+                _developers.Add(splittedFirstLine[DEVELOPER], developer);
+            }
+
+            //Developer developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
             DateTime.TryParse(splittedFirstLine[DATE], out DateTime timestamp);
             string hash = splittedFirstLine[HASH];
             //string message = splittedFirstLine[MESSAGEONE];
