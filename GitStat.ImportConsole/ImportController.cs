@@ -89,6 +89,8 @@ namespace GitStat.ImportConsole
             //    //last point
             //}
 
+            //check for multiple commit rows in block
+
 
             string[] splittedFirstLine = firstLine.Split(',');
             string[] splittedLastLine = lastLine.Split(',');
