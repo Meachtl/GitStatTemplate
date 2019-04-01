@@ -45,7 +45,7 @@ namespace GitStat.ImportConsole
             using (IUnitOfWork unitOfWork = new UnitOfWork())
             {
                 PrintFristQuery(unitOfWork);
-                PrintSeondQuery(unitOfWork);
+                PrintSecondQuery(unitOfWork);
                 PrintThirdQuery(unitOfWork);
             }
             Console.Write("Beenden mit Eingabetaste ...");
@@ -63,7 +63,7 @@ namespace GitStat.ImportConsole
             Console.WriteLine();
         }
 
-        private static void PrintSeondQuery(IUnitOfWork unitOfWork)
+        private static void PrintSecondQuery(IUnitOfWork unitOfWork)
         {
             int id = 4;
 
