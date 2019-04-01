@@ -44,40 +44,9 @@ namespace GitStat.ImportConsole
             Console.WriteLine("=================");
             using (IUnitOfWork unitOfWork = new UnitOfWork())
             {
-                //DateTime to = new DateTime(2019, 03, 29);
-                //int id = 4;
-
                 PrintFristQuery(unitOfWork);
                 PrintSeondQuery(unitOfWork);
                 PrintThirdQuery(unitOfWork);
-
-
-                //List<QueryDTO> lastFourWeeks = unitOfWork.CommitRepository.GetCommitsOfLastFourWeeks(to);
-
-                //QueryDTO commitOfIdFour = unitOfWork.CommitRepository.GetCommitOfId(id);
-
-                //(string, int,int,int,int)[] statisitcOfAllDevelopers = unitOfWork.DeveloperRepository.GetStatisticOfAllDevelopers();
-
-                //Console.WriteLine(
-                //    "Commits der letzten 4 Wochen\n" +
-                //    "----------------------------");
-                //PrintHeader();                
-                //PrintResultList(lastFourWeeks);
-                //Console.WriteLine();
-
-                //Console.WriteLine(
-                //    "Commit mit Id 4\n" +
-                //    "---------------");
-                //PrintResult(commitOfIdFour);
-                //Console.WriteLine();
-
-                //Console.WriteLine(
-                //    "Statistik der Commits der Developer\n" +
-                //    "-----------------------------------");
-                //PrintTupleResult(statisitcOfAllDevelopers);
-                //Console.WriteLine();
-
-
             }
             Console.Write("Beenden mit Eingabetaste ...");
             Console.ReadLine();
@@ -130,7 +99,6 @@ namespace GitStat.ImportConsole
                 Console.WriteLine(
                   $"{item.Item1,-20} {item.Item2,10} {item.Item3,11} {item.Item4,10} {item.Item5,9}");
             }
-            
         }
 
         private static void PrintResult(QueryDTO item)
@@ -152,7 +120,6 @@ namespace GitStat.ImportConsole
                 Console.WriteLine(
                 $"{item.Developer.Name,-20} {item.DateTime.ToShortDateString(),-12} {item.FilesChanged,11} {item.Insertions,10} {item.Deletions,9}");
             }
-            
         }
     }
 }
