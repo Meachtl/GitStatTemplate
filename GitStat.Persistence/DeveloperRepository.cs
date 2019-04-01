@@ -20,9 +20,11 @@ namespace GitStat.Persistence
 
         public (string, int, int, int, int)[] GetStatisticOfAllDevelopers()
         {
+            //create new list of tupel
             List<(string, int, int, int, int)> tuplesList = new List<(string, int, int, int, int)>();
 
-            var query = _dbContext.Developers.Join(// outer sequence
+            //get innerJoin of Developers and Commits
+            var innerJoin = _dbContext.Developers.Join(// outer sequence
                 _dbContext.Commits, //inner sequence
                 dev => dev.Id, //outer Key Selector
                 com => com.DeveloperId, //inner Key Selector
@@ -34,7 +36,8 @@ namespace GitStat.Persistence
                     Deletions=com.Deletions
                 });
 
-            var result = query.GroupBy(x => x.Developer)
+            //group innerJoin by Developer and calc results
+            var result = innerJoin.GroupBy(x => x.Developer)
                 .Select(g => new
                 {
                     Developer=g.Key,
@@ -44,12 +47,16 @@ namespace GitStat.Persistence
                     Deletions = g.Sum(x => x.Deletions)
                 });
 
+            //order result
             var finalResult = result.OrderByDescending(x => x.Commits);
 
+            //add each result to tuple list
             foreach (var item in finalResult)
             {
                 tuplesList.Add((item.Developer, item.Commits, item.FileChanges, item.Insertions, item.Deletions));
             }
+
+            //return tupleList as array
             return tuplesList.ToArray();
         }
     }
