@@ -12,5 +12,7 @@ namespace GitStat.Core.DataTransferObjects
         public int FilesChanged { get; set; }
         public int Insertions { get; set; }
         public int Deletions { get; set; }
+
+        public int Commits { get; set; }
     }
 }

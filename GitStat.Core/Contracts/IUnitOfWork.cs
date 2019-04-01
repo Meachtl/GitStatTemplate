@@ -7,6 +7,7 @@ namespace GitStat.Core.Contracts
  
         ICommitRepository CommitRepository { get; }
         IDeveloperRepository DeveloperRepository { get; }
+        
 
         int SaveChanges();
 
