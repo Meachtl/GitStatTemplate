@@ -39,7 +39,6 @@ namespace GitStat.Persistence
                 .Single();
 
             return query;
-
         }
 
         public List<QueryDTO> GetCommitsOfLastFourWeeks(DateTime to)
@@ -61,7 +60,5 @@ namespace GitStat.Persistence
 
             return query;
         }
-
-        
     }
 }
