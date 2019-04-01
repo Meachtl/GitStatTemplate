@@ -17,7 +17,7 @@ namespace GitStat.ImportConsole
         /// <summary>
         /// Liefert die Messwerte mit den dazugehörigen Sensoren
         /// </summary>
-        public static Commit[] ReadFromCsv()
+        public static Commit[] ReadFromTxt()
         {
             string path = MyFile.GetFullNameInApplicationTree(Filename);
             string text = File.ReadAllText(path, Encoding.Default);

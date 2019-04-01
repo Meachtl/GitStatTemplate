@@ -22,7 +22,7 @@ namespace GitStat.ImportConsole
                 Console.WriteLine("Datenbank migrieren");
                 unitOfWorkImport.MigrateDatabase();
                 Console.WriteLine("Commits werden von commits.txt eingelesen");
-                var commits = ImportController.ReadFromCsv();
+                var commits = ImportController.ReadFromTxt();
                 if (commits.Length == 0)
                 {
                     Console.WriteLine("!!! Es wurden keine Commits eingelesen");
