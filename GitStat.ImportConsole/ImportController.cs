@@ -28,72 +28,34 @@ namespace GitStat.ImportConsole
             //Split read in text into blocks
             string[] block = text.Split("\n\r\n");
 
-            //Commit currentCommit; // = GetCommitOfEachBlock(block);
-
             for (int i = 0; i < block.Length; i++)
             {
-                //if (i == 3)
-                //{
-                //    if (true)
-                //    {
-
-                //    }
-                //}
                 //get each line out of the block
                 string lineOfBlock = block[i];
                 returnedCommits = GetCommitOfEachBlock(lineOfBlock);
-                //currentCommit = GetCommitOfEachBlock(lineOfBlock);
 
                 foreach (Commit currentCommit in returnedCommits)
                 {
                     commits.Add(currentCommit);
                 }
-                //commits.Add(currentCommit);
             }
-
-
-            ////get each line out of the block
-            //string lineOfBlock = block[0];
-
-            ////split lineOfBlock into it rows
-            //string[] firstLineBlock = lineOfBlock.Split("\n");
-
-            ////get firstline and lastline out of the block
-            //string firstLine = firstLineBlock.First();
-            //string lastLine = firstLineBlock.Last();
-
-
-
-
-
-
             return commits.ToArray();
         }
 
         private static List<Commit> GetCommitOfEachBlock(string lineOfBlock)
         {
-
             List<Commit> commits = new List<Commit>();
-
-
             Commit currentCommit = new Commit();
             //const int of first line
             const int HASH = 0;
-            const int DEVELOPER = 1;
             const int DATE = 2;
-            const int MESSAGEONE = 3;
-            const int MESSAGETWO = 4;
-            const int MESSAGETHREE = 5;
 
             //cons tint of last line
             const int FILESCHANGED = 0;
             const int INSERTIONS = 1;
             const int DELETIONS = 2;
-
-
             
             ////get each line out of the block
-            //string lineOfBlock = block[i];
 
             //split lineOfBlock into it rows
             string[] firstLineBlock = lineOfBlock.Split("\n");
@@ -101,37 +63,19 @@ namespace GitStat.ImportConsole
             //get firstline and lastline out of the block
             string firstLine = firstLineBlock.First();
             string lastLine = firstLineBlock.Last();
-            //if (lastLine == null)
-            //{
-            //    lastLine = firstLineBlock.Last();
-            //    //last point
-            //}
             /*
             filechanges	7868
             insert	646134
-
             delet	25959
             */
 
-
             string tests = firstLineBlock.First();
             string[] test1 = tests.Split(',');
-
-            //if (test1[0] == "a6bfd4f")
-            //{
-            //    if (true)
-            //    {
-
-            //    }
-            //}
-
-
 
             //check for multiple commit rows in block
             var commitLines = firstLineBlock.TakeWhile(x => !x.StartsWith(' '));
 
             string[] test = commitLines.ToArray();
-
 
             int length = test.Count();
 
@@ -148,7 +92,6 @@ namespace GitStat.ImportConsole
                 //multiple rows in header
                 if (i < length - 1)
                 {
-                    //splittedFirstLine = firstLine.Split(',');
                     developer = GetDeveloper(splittedFirstLine);
 
                     DateTime.TryParse(splittedFirstLine[DATE], out DateTime timestamp);
@@ -183,12 +126,10 @@ namespace GitStat.ImportConsole
                     };
 
                     commits.Add(currentCommit);
-                    //return currentCommit;
                 }
                 //last row or single header
                 else
                 {
-                    //splittedFirstLine = firstLine.Split(',');
                     splittedLastLine = lastLine.Split(',');
                     developer = GetDeveloper(splittedFirstLine);
 
@@ -209,7 +150,6 @@ namespace GitStat.ImportConsole
                     }
 
                     int filesChanges = GetNumberOutOfString(splittedLastLine[FILESCHANGED]);
-
 
                     int insertions = 0;
                     int deletions = 0;
@@ -238,100 +178,8 @@ namespace GitStat.ImportConsole
                         Deletions = deletions
                     };
                     commits.Add(currentCommit);
-                    //return currentCommit;
                 }
             }
-
-
-            //if (true)
-            //{
-
-            //}
-
-            //string[] splittedFirstLine = firstLine.Split(',');
-            //string[] splittedLastLine = lastLine.Split(',');
-
-            //Developer developer;
-
-            //if (_developers.ContainsKey(splittedFirstLine[DEVELOPER]))
-            //{
-            //    _developers.TryGetValue(splittedFirstLine[DEVELOPER], out developer);
-            //}
-            //else
-            //{
-            //    developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
-            //    _developers.Add(splittedFirstLine[DEVELOPER], developer);
-            //}
-
-            //Developer developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
-            //DateTime.TryParse(splittedFirstLine[DATE], out DateTime timestamp);
-            //string hash = splittedFirstLine[HASH];
-            //string message = splittedFirstLine[MESSAGEONE];
-            //string message = "";
-            //for (int i = 3; i < splittedFirstLine.Length; i++)
-            //{
-            //    if (i == 3)
-            //    {
-            //        message += splittedFirstLine[i];
-            //    }
-            //    else
-            //    {
-            //        message += ", " + splittedFirstLine[i]; 
-            //    }
-            //}
-
-            //int filesChanges = GetNumberOutOfString(splittedLastLine[FILESCHANGED]);
-            //int insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-            //int deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
-
-            //int insertions = 0;
-            //int deletions = 0;
-
-            //if (splittedLastLine[INSERTIONS].Contains('+'))
-            //{
-            //    insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-            //    if (splittedLastLine.Length > 3 && splittedLastLine[DELETIONS].Contains('-'))
-            //    {
-            //        deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
-            //    }
-            //}
-            //else if (splittedLastLine[INSERTIONS].Contains('-'))
-            //{
-            //    deletions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-            //}
-            //else if (splittedLastLine[DELETIONS].Contains('+'))
-            //{
-            //    insertions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
-            //}
-            //else
-            //{
-            //    deletions= GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-            //}
-
-            
-
-            //currentCommit = new Commit(developer, timestamp, hash, message, filesChanged, insertions, deletions);
-
-            //currentCommit = new Commit
-            //{
-            //    Developer = developer,
-            //    Date = timestamp,
-            //    HashCode = hash,
-            //    Message = message,
-            //    FilesChanges = filesChanges,
-            //    Insertions = insertions,
-            //    Deletions = deletions
-            //};
-
-            ////get each line out of the block
-            //string lineOfBlock = block[0];
-
-            ////split lineOfBlock into it rows
-            //string[] firstLineBlock = lineOfBlock.Split("\n");
-
-            ////get firstline and lastline out of the block
-            //string firstLine = firstLineBlock.First();
-            //string lastLine = firstLineBlock.Last();
             return commits;
         }
 
@@ -357,7 +205,6 @@ namespace GitStat.ImportConsole
         {
             var query = line
                 .SkipWhile(x => x < '0' || x > '9');
-
             //var query = line
             //    .TakeWhile(x => x >= '0' && x <= '9');
 
@@ -365,8 +212,6 @@ namespace GitStat.ImportConsole
                 .TakeWhile(x => x >= '0' && x <= '9').Reverse().ToArray();
 
             int result = -1;
-
-            //int test = (int) number[1];
 
             for (int i = 0; i < number.Count(); i++)
             {
@@ -381,95 +226,3 @@ namespace GitStat.ImportConsole
         }
     }
 }
-/*
- 
-     //string[] splittedFirstLine = firstLine.Split(',');
-            string[] splittedLastLine = lastLine.Split(',');
-
-            Developer developer;
-
-            if (_developers.ContainsKey(splittedFirstLine[DEVELOPER]))
-            {
-                _developers.TryGetValue(splittedFirstLine[DEVELOPER], out developer);
-            }
-            else
-            {
-                developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
-                _developers.Add(splittedFirstLine[DEVELOPER], developer);
-            }
-
-            //Developer developer = new Developer { Name = splittedFirstLine[DEVELOPER] };
-            DateTime.TryParse(splittedFirstLine[DATE], out DateTime timestamp);
-            string hash = splittedFirstLine[HASH];
-            //string message = splittedFirstLine[MESSAGEONE];
-            string message = "";
-            for (int i = 3; i < splittedFirstLine.Length; i++)
-            {
-                if (i == 3)
-                {
-                    message += splittedFirstLine[i];
-                }
-                else
-                {
-                    message += ", " + splittedFirstLine[i]; 
-                }
-            }
-
-            int filesChanges = GetNumberOutOfString(splittedLastLine[FILESCHANGED]);
-            //int insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-            //int deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
-
-            int insertions = 0;
-            int deletions = 0;
-
-            if (splittedLastLine[INSERTIONS].Contains('+'))
-            {
-                insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-                if (splittedLastLine.Length > 3 && splittedLastLine[DELETIONS].Contains('-'))
-                {
-                    deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
-                }
-            }
-            else if (splittedLastLine[INSERTIONS].Contains('-'))
-            {
-                deletions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-            }
-            //else if (splittedLastLine[DELETIONS].Contains('+'))
-            //{
-            //    insertions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
-            //}
-            //else
-            //{
-            //    deletions= GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-            //}
-
-            
-
-            //currentCommit = new Commit(developer, timestamp, hash, message, filesChanged, insertions, deletions);
-
-            currentCommit = new Commit
-            {
-                Developer = developer,
-                Date = timestamp,
-                HashCode = hash,
-                Message = message,
-                FilesChanges = filesChanges,
-                Insertions = insertions,
-                Deletions = deletions
-            };
-
-            ////get each line out of the block
-            //string lineOfBlock = block[0];
-
-            ////split lineOfBlock into it rows
-            //string[] firstLineBlock = lineOfBlock.Split("\n");
-
-            ////get firstline and lastline out of the block
-            //string firstLine = firstLineBlock.First();
-            //string lastLine = firstLineBlock.Last();
-
-
-
-
-
-            return currentCommit;*/
