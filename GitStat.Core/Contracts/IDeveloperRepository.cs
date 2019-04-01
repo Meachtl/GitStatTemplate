@@ -7,7 +7,5 @@ namespace GitStat.Core.Contracts
     public interface IDeveloperRepository
     {
          (string, int, int, int, int)[]GetStatisticOfAllDevelopers();
-
-        
     }
 }
