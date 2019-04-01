@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GitStat.Core.DataTransferObjects
 {
-    class QueryDTO
+    public class QueryDTO
     {
         public Developer Developer { get; set; }
         public DateTime DateTime { get; set; }

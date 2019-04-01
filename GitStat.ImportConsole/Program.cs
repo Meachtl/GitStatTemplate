@@ -41,6 +41,9 @@ namespace GitStat.ImportConsole
             Console.WriteLine("=================");
             using (IUnitOfWork unitOfWork = new UnitOfWork())
             {
+                //var lastFourWeeks = unitOfWork.
+
+
             }
             Console.Write("Beenden mit Eingabetaste ...");
             Console.ReadLine();
