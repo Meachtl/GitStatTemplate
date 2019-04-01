@@ -31,5 +31,10 @@ namespace GitStat.Core.Entities
         public int Insertions { get; set; }
         public int Deletions { get; set; }
 
+        public override string ToString()
+        {
+            return string.Format($"{HashCode}, {FilesChanges}, {Insertions}, {Deletions}");
+        }
+
     }
 }

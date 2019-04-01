@@ -32,6 +32,13 @@ namespace GitStat.ImportConsole
 
             for (int i = 0; i < block.Length; i++)
             {
+                //if (i == 3)
+                //{
+                //    if (true)
+                //    {
+
+                //    }
+                //}
                 //get each line out of the block
                 string lineOfBlock = block[i];
                 returnedCommits = GetCommitOfEachBlock(lineOfBlock);
@@ -141,7 +148,7 @@ namespace GitStat.ImportConsole
                 //multiple rows in header
                 if (i < length - 1)
                 {
-                    splittedFirstLine = firstLine.Split(',');
+                    //splittedFirstLine = firstLine.Split(',');
                     developer = GetDeveloper(splittedFirstLine);
 
                     DateTime.TryParse(splittedFirstLine[DATE], out DateTime timestamp);
@@ -181,7 +188,7 @@ namespace GitStat.ImportConsole
                 //last row or single header
                 else
                 {
-                    splittedFirstLine = firstLine.Split(',');
+                    //splittedFirstLine = firstLine.Split(',');
                     splittedLastLine = lastLine.Split(',');
                     developer = GetDeveloper(splittedFirstLine);
 
@@ -210,7 +217,7 @@ namespace GitStat.ImportConsole
                     if (splittedLastLine[INSERTIONS].Contains('+'))
                     {
                         insertions = GetNumberOutOfString(splittedLastLine[INSERTIONS]);
-                        if (splittedLastLine.Length > 3 && splittedLastLine[DELETIONS].Contains('-'))
+                        if (splittedLastLine.Length == 3 && splittedLastLine[DELETIONS].Contains('-'))
                         {
                             deletions = GetNumberOutOfString(splittedLastLine[DELETIONS]);
                         }
