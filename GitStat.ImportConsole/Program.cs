@@ -44,40 +44,81 @@ namespace GitStat.ImportConsole
             Console.WriteLine("=================");
             using (IUnitOfWork unitOfWork = new UnitOfWork())
             {
-                
+                //DateTime to = new DateTime(2019, 03, 29);
+                //int id = 4;
 
-                DateTime to = new DateTime(2019, 03, 29);
-                int id = 4;
+                PrintFristQuery(unitOfWork);
+                PrintSeondQuery(unitOfWork);
+                PrintThirdQuery(unitOfWork);
 
-                List<QueryDTO> lastFourWeeks = unitOfWork.CommitRepository.GetCommitsOfLastFourWeeks(to);
 
-                QueryDTO commitOfIdFour = unitOfWork.CommitRepository.GetCommitOfId(id);
+                //List<QueryDTO> lastFourWeeks = unitOfWork.CommitRepository.GetCommitsOfLastFourWeeks(to);
 
-                (string, int,int,int,int)[] statisitcOfAllDevelopers = unitOfWork.DeveloperRepository.GetStatisticOfAllDevelopers();
+                //QueryDTO commitOfIdFour = unitOfWork.CommitRepository.GetCommitOfId(id);
 
-                Console.WriteLine(
-                    "Commits der letzten 4 Wochen\n" +
-                    "----------------------------");
-                PrintHeader();                
-                PrintResultList(lastFourWeeks);
-                Console.WriteLine();
+                //(string, int,int,int,int)[] statisitcOfAllDevelopers = unitOfWork.DeveloperRepository.GetStatisticOfAllDevelopers();
 
-                Console.WriteLine(
-                    "Commit mit Id 4\n" +
-                    "---------------");
-                PrintResult(commitOfIdFour);
-                Console.WriteLine();
+                //Console.WriteLine(
+                //    "Commits der letzten 4 Wochen\n" +
+                //    "----------------------------");
+                //PrintHeader();                
+                //PrintResultList(lastFourWeeks);
+                //Console.WriteLine();
 
-                Console.WriteLine(
-                    "Statistik der Commits der Developer\n" +
-                    "-----------------------------------");
-                PrintTupleResult(statisitcOfAllDevelopers);
-                Console.WriteLine();
+                //Console.WriteLine(
+                //    "Commit mit Id 4\n" +
+                //    "---------------");
+                //PrintResult(commitOfIdFour);
+                //Console.WriteLine();
+
+                //Console.WriteLine(
+                //    "Statistik der Commits der Developer\n" +
+                //    "-----------------------------------");
+                //PrintTupleResult(statisitcOfAllDevelopers);
+                //Console.WriteLine();
 
 
             }
             Console.Write("Beenden mit Eingabetaste ...");
             Console.ReadLine();
+        }
+
+        private static void PrintThirdQuery(IUnitOfWork unitOfWork)
+        {
+            (string, int, int, int, int)[] statisitcOfAllDevelopers = unitOfWork.DeveloperRepository.GetStatisticOfAllDevelopers();
+
+            Console.WriteLine(
+                    "Statistik der Commits der Developer\n" +
+                    "-----------------------------------");
+            PrintTupleResult(statisitcOfAllDevelopers);
+            Console.WriteLine();
+        }
+
+        private static void PrintSeondQuery(IUnitOfWork unitOfWork)
+        {
+            int id = 4;
+
+            QueryDTO commitOfIdFour = unitOfWork.CommitRepository.GetCommitOfId(id);
+
+            Console.WriteLine(
+                    "Commit mit Id 4\n" +
+                    "---------------");
+            PrintResult(commitOfIdFour);
+            Console.WriteLine();
+        }
+
+        private static void PrintFristQuery(IUnitOfWork unitOfWork)
+        {
+            DateTime to = new DateTime(2019, 03, 29);
+
+            List<QueryDTO> lastFourWeeks = unitOfWork.CommitRepository.GetCommitsOfLastFourWeeks(to);
+
+            Console.WriteLine(
+                    "Commits der letzten 4 Wochen\n" +
+                    "----------------------------");
+            PrintHeader();
+            PrintResultList(lastFourWeeks);
+            Console.WriteLine();
         }
 
         private static void PrintTupleResult((string, int, int, int, int)[] statisitcOfAllDevelopers)
