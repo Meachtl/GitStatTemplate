@@ -78,7 +78,7 @@ namespace GitStat.ImportConsole
 
         private static void PrintFristQuery(IUnitOfWork unitOfWork)
         {
-            DateTime to = new DateTime(2019, 03, 29);
+            DateTime to = new DateTime(2019, 03, 27);
 
             List<QueryDTO> lastFourWeeks = unitOfWork.CommitRepository.GetCommitsOfLastFourWeeks(to);
 

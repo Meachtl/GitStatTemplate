@@ -58,22 +58,31 @@ namespace GitStat.ImportConsole
             ////get each line out of the block
 
             //split lineOfBlock into it rows
-            string[] firstLineBlock = lineOfBlock.Split("\n");
+            string[] linesOfBlock = lineOfBlock.Split("\n");
+
+            //check lastline if empty
+            //newDeck = newDeck.Take(newDeck.Count() - 1).ToArray();
+            string checkLastLine = linesOfBlock.Last();
+            while (checkLastLine == " ")
+            {
+                linesOfBlock = linesOfBlock.Take(linesOfBlock.Count() - 1).ToArray();
+                checkLastLine = linesOfBlock.Last();
+            }
 
             //get firstline and lastline out of the block
-            string firstLine = firstLineBlock.First();
-            string lastLine = firstLineBlock.Last();
+            string firstLine = linesOfBlock.First();
+            string lastLine = linesOfBlock.Last();
             /*
             filechanges	7868
             insert	646134
             delet	25959
             */
 
-            string tests = firstLineBlock.First();
+            string tests = linesOfBlock.First();
             string[] test1 = tests.Split(',');
 
             //check for multiple commit rows in block
-            var commitLines = firstLineBlock.TakeWhile(x => !x.StartsWith(' '));
+            var commitLines = linesOfBlock.TakeWhile(x => !x.StartsWith(' '));
 
             string[] test = commitLines.ToArray();
 
