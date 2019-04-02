@@ -84,9 +84,9 @@ namespace GitStat.ImportConsole
             //check for multiple commit rows in block
             var commitLines = linesOfBlock.TakeWhile(x => !x.StartsWith(' '));
 
-            string[] test = commitLines.ToArray();
+            string[] commitLinesArray = commitLines.ToArray();
 
-            int length = test.Count();
+            int length = commitLinesArray.Count();
 
             string[] splittedFirstLine;
             string[] splittedLastLine;
@@ -96,7 +96,7 @@ namespace GitStat.ImportConsole
             for (int i = 0; i < length; i++)
             {
                 //splitt each line
-                splittedFirstLine = test[i].Split(',');
+                splittedFirstLine = commitLinesArray[i].Split(',');
 
                 //multiple rows in header
                 if (i < length - 1)
