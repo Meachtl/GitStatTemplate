@@ -59,11 +59,11 @@ namespace GitStat.ImportConsole
 
             //split lineOfBlock into it rows
             string[] linesOfBlock = lineOfBlock.Split("\n");
-
+            
             //check lastline if empty
             //newDeck = newDeck.Take(newDeck.Count() - 1).ToArray();
             string checkLastLine = linesOfBlock.Last();
-            while (checkLastLine == " ")
+            while (checkLastLine == " " || checkLastLine == " \r")
             {
                 linesOfBlock = linesOfBlock.Take(linesOfBlock.Count() - 1).ToArray();
                 checkLastLine = linesOfBlock.Last();
